@@ -5,10 +5,10 @@ import (
   "reflect"
   "strings"
 
-  "github.com/emei/log"
-  "github.com/emei/otel"
-  "github.com/emei/rpc"
-  "github.com/emei/server/reger"
+  "github.com/yolksys/emei/log"
+  "github.com/yolksys/emei/otel"
+  "github.com/yolksys/emei/rpc"
+  "github.com/yolksys/emei/server/reger"
 )
 
 // init(arg ...

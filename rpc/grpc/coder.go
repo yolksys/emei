@@ -5,7 +5,7 @@ import (
   "fmt"
   "reflect"
 
-  "github.com/emei/env"
+  "github.com/yolksys/emei/env"
 )
 
 type encoder struct {

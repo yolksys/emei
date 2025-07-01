@@ -6,7 +6,7 @@ import (
   "regexp"
   "strings"
 
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/utils"
 )
 
 func Bool(name, desc string, dft bool, short ...rune) bool {

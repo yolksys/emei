@@ -3,7 +3,7 @@ package web
 import (
   "net/http"
 
-  "github.com/emei/rpc/rpcabs"
+  "github.com/yolksys/emei/rpc/rpcabs"
 )
 
 type webrpc struct {

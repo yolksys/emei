@@ -5,9 +5,9 @@ import (
   "io"
   "sync"
 
-  "github.com/emei/env"
-  "github.com/emei/kube"
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/env"
+  "github.com/yolksys/emei/kube"
+  "github.com/yolksys/emei/utils"
 )
 
 type SvcInfo struct {

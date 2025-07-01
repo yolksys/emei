@@ -6,7 +6,7 @@ import (
   "io"
   "sync"
 
-  "github.com/emei/env"
+  "github.com/yolksys/emei/env"
 )
 
 type writer struct {

@@ -6,8 +6,8 @@ import (
   "fmt"
   "unicode"
 
-  "github.com/emei/cfg/source/inter"
-  "github.com/emei/cfg/values"
+  "github.com/yolksys/emei/cfg/source/inter"
+  "github.com/yolksys/emei/cfg/values"
   "github.com/tidwall/gjson"
 )
 

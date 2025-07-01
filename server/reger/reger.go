@@ -3,8 +3,8 @@ package reger
 import (
   "reflect"
 
-  "github.com/emei/rpc"
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/rpc"
+  "github.com/yolksys/emei/utils"
 )
 
 // RegRpc ...

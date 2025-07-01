@@ -4,8 +4,8 @@ import (
   "net/rpc"
   "sync"
 
-  "github.com/emei/env"
-  "github.com/emei/rpc/rpcabs"
+  "github.com/yolksys/emei/env"
+  "github.com/yolksys/emei/rpc/rpcabs"
   "github.com/quic-go/quic-go"
 )
 

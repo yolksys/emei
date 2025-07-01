@@ -9,7 +9,7 @@ import (
   "net/rpc"
   "reflect"
 
-  "github.com/emei/env"
+  "github.com/yolksys/emei/env"
   "github.com/quic-go/quic-go"
 )
 

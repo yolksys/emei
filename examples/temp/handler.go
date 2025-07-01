@@ -4,7 +4,7 @@ import (
   "fmt"
   "io"
 
-  "github.com/emei"
+  "github.com/yolksys/emei"
   "yolk.com/pdt/temp"
 )
 

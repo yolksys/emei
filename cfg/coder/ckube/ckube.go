@@ -7,8 +7,8 @@ import (
   "strings"
 
   "k8s.io/api/core/v1"
-  "github.com/emei/cfg/source/inter"
-  "github.com/emei/cfg/values"
+  "github.com/yolksys/emei/cfg/source/inter"
+  "github.com/yolksys/emei/cfg/values"
 )
 
 type values_ struct {

@@ -8,10 +8,10 @@ import (
   "path"
   "strings"
 
-  "github.com/emei/cfg/coder"
-  "github.com/emei/cfg/source"
-  "github.com/emei/cmd"
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/cfg/coder"
+  "github.com/yolksys/emei/cfg/source"
+  "github.com/yolksys/emei/cmd"
+  "github.com/yolksys/emei/utils"
 )
 
 // private

@@ -3,7 +3,7 @@ package etcintra
 import (
   "context"
 
-  "github.com/emei/etc/etcout"
+  "github.com/yolksys/emei/etc/etcout"
 )
 
 type Client interface {

@@ -1,7 +1,7 @@
 package webrtc
 
 import (
-  "github.com/emei/env"
+  "github.com/yolksys/emei/env"
   "github.com/gorilla/websocket"
 )
 

@@ -7,8 +7,8 @@ import (
   "strings"
   "time"
 
-  "github.com/emei/cfg/coder"
-  "github.com/emei/cfg/source"
+  "github.com/yolksys/emei/cfg/coder"
+  "github.com/yolksys/emei/cfg/source"
 )
 
 // p = "m.k.l"

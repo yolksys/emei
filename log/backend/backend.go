@@ -1,9 +1,9 @@
 package backend
 
 import (
-  _ "github.com/emei/log/backend/console"
-  "github.com/emei/log/backend/intra"
-  _ "github.com/emei/log/backend/otel"
+  _ "github.com/yolksys/emei/log/backend/console"
+  "github.com/yolksys/emei/log/backend/intra"
+  _ "github.com/yolksys/emei/log/backend/otel"
 )
 
 func Get(name string) intra.BcdNew {

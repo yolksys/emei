@@ -1,4 +1,4 @@
-module github.com/emei
+module github.com/yolksys/emei
 
 go 1.24.0
 

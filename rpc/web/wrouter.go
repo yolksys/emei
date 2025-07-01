@@ -8,10 +8,10 @@ import (
   "reflect"
   "strings"
 
-  "github.com/emei/env"
-  "github.com/emei/log"
-  "github.com/emei/rpc/coder"
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/env"
+  "github.com/yolksys/emei/log"
+  "github.com/yolksys/emei/rpc/coder"
+  "github.com/yolksys/emei/utils"
 )
 
 // route ...

@@ -6,7 +6,7 @@ import (
   "strconv"
   "time"
 
-  "github.com/emei/log/cache"
+  "github.com/yolksys/emei/log/cache"
 )
 
 func caller(l *logger) {

@@ -5,7 +5,7 @@ import (
   "fmt"
   "time"
 
-  "github.com/emei"
+  "github.com/yolksys/emei"
   "yolk.com/pdt/temp"
 )
 

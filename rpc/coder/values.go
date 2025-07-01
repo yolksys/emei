@@ -4,8 +4,8 @@ import (
   "fmt"
   "reflect"
 
-  "github.com/emei/env"
-  "github.com/emei/rpc/rpcabs"
+  "github.com/yolksys/emei/env"
+  "github.com/yolksys/emei/rpc/rpcabs"
 )
 
 // Header ...

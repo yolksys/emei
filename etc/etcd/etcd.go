@@ -8,8 +8,8 @@ import (
 
   "go.etcd.io/etcd/client/v3"
   "go.etcd.io/etcd/client/v3/namespace"
-  "github.com/emei/etc/etcintra"
-  "github.com/emei/etc/etcout"
+  "github.com/yolksys/emei/etc/etcintra"
+  "github.com/yolksys/emei/etc/etcout"
 )
 
 type client struct {

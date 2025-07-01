@@ -3,10 +3,10 @@ package rpc
 import (
   "flag"
 
-  "github.com/emei/rpc/grpc"
-  "github.com/emei/rpc/nrpc"
-  "github.com/emei/rpc/rpcabs"
-  "github.com/emei/rpc/web"
+  "github.com/yolksys/emei/rpc/grpc"
+  "github.com/yolksys/emei/rpc/nrpc"
+  "github.com/yolksys/emei/rpc/rpcabs"
+  "github.com/yolksys/emei/rpc/web"
 )
 
 type (

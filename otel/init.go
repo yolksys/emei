@@ -12,9 +12,9 @@ import (
   "go.opentelemetry.io/otel/sdk/metric"
   "go.opentelemetry.io/otel/sdk/trace"
 
-  "github.com/emei/cfg"
-  "github.com/emei/kube"
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/cfg"
+  "github.com/yolksys/emei/kube"
+  "github.com/yolksys/emei/utils"
   "go.opentelemetry.io/otel/sdk/resource"
 )
 

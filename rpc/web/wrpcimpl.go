@@ -5,7 +5,7 @@ import (
   "errors"
   "net/http"
 
-  "github.com/emei/log"
+  "github.com/yolksys/emei/log"
 )
 
 func (s *webrpc) Name() string {

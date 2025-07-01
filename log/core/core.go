@@ -4,10 +4,10 @@ import (
   "context"
   "sync"
 
-  "github.com/emei/cfg"
-  "github.com/emei/log/backend"
-  "github.com/emei/log/cache"
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/cfg"
+  "github.com/yolksys/emei/log/backend"
+  "github.com/yolksys/emei/log/cache"
+  "github.com/yolksys/emei/utils"
 )
 
 // Level defines log levels.

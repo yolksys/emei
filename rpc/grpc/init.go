@@ -1,6 +1,6 @@
 package grpc
 
-import "github.com/emei/rpc/call"
+import "github.com/yolksys/emei/rpc/call"
 
 func init() {
   call.RegSender("grpc", newSender())

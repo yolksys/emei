@@ -3,12 +3,12 @@ package emei
 import (
   "time"
 
-  "github.com/emei/cfg"
-  "github.com/emei/cmd"
-  "github.com/emei/env"
-  "github.com/emei/log"
-  _c "github.com/emei/rpc/call"
-  svr "github.com/emei/server"
+  "github.com/yolksys/emei/cfg"
+  "github.com/yolksys/emei/cmd"
+  "github.com/yolksys/emei/env"
+  "github.com/yolksys/emei/log"
+  _c "github.com/yolksys/emei/rpc/call"
+  svr "github.com/yolksys/emei/server"
 )
 
 // env

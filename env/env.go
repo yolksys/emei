@@ -7,11 +7,11 @@ import (
   "reflect"
   "sync"
 
-  "github.com/emei/log"
-  "github.com/emei/log/core"
+  "github.com/yolksys/emei/log"
+  "github.com/yolksys/emei/log/core"
 
-  "github.com/emei/otel"
-  "github.com/emei/utils"
+  "github.com/yolksys/emei/otel"
+  "github.com/yolksys/emei/utils"
 )
 
 type env struct {

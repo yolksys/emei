@@ -4,10 +4,10 @@ import (
   "errors"
   "fmt"
 
-  "github.com/emei/cfg/coder/cfgc"
-  "github.com/emei/cfg/coder/yaml"
-  "github.com/emei/cfg/source/inter"
-  "github.com/emei/cfg/values"
+  "github.com/yolksys/emei/cfg/coder/cfgc"
+  "github.com/yolksys/emei/cfg/coder/yaml"
+  "github.com/yolksys/emei/cfg/source/inter"
+  "github.com/yolksys/emei/cfg/values"
 )
 
 // encoder ...

@@ -7,12 +7,12 @@ import (
   "strings"
   "time"
 
-  "github.com/emei/env"
-  "github.com/emei/kube/resolver"
-  "github.com/emei/pki"
-  "github.com/emei/rpc/call"
-  "github.com/emei/rpc/coder"
-  "github.com/emei/rpc/rpcabs"
+  "github.com/yolksys/emei/env"
+  "github.com/yolksys/emei/kube/resolver"
+  "github.com/yolksys/emei/pki"
+  "github.com/yolksys/emei/rpc/call"
+  "github.com/yolksys/emei/rpc/coder"
+  "github.com/yolksys/emei/rpc/rpcabs"
 )
 
 type webres struct {

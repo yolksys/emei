@@ -4,7 +4,7 @@ import (
   "fmt"
   "strings"
 
-  "github.com/emei/cfg/source/inter"
+  "github.com/yolksys/emei/cfg/source/inter"
 )
 
 type etcs struct {

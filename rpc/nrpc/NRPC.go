@@ -6,9 +6,9 @@ import (
   "strings"
   "sync/atomic"
 
-  "github.com/emei/env"
-  "github.com/emei/rpc/call"
-  "github.com/emei/rpc/coder"
+  "github.com/yolksys/emei/env"
+  "github.com/yolksys/emei/rpc/call"
+  "github.com/yolksys/emei/rpc/coder"
 )
 
 func (s *server) serve(cnt *int32) (err error) {

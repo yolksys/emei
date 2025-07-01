@@ -10,9 +10,9 @@ import (
   "strings"
   "sync"
 
-  "github.com/emei/cfg"
-  "github.com/emei/kube"
-  "github.com/emei/log"
+  "github.com/yolksys/emei/cfg"
+  "github.com/yolksys/emei/kube"
+  "github.com/yolksys/emei/log"
 )
 
 func (s *RpcImp) RegRcvr(rcvrs map[string]*Recver) {

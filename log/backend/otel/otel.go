@@ -4,9 +4,9 @@ import (
   "context"
   "time"
 
-  "github.com/emei/log/backend/intra"
-  "github.com/emei/log/cache"
-  rotel "github.com/emei/otel"
+  "github.com/yolksys/emei/log/backend/intra"
+  "github.com/yolksys/emei/log/cache"
+  rotel "github.com/yolksys/emei/otel"
 )
 
 type otel struct {

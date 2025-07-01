@@ -1,9 +1,9 @@
 package etc
 
 import (
-  "github.com/emei/etc/dns"
-  "github.com/emei/etc/etcintra"
-  "github.com/emei/etc/etcout"
+  "github.com/yolksys/emei/etc/dns"
+  "github.com/yolksys/emei/etc/etcintra"
+  "github.com/yolksys/emei/etc/etcout"
 )
 
 // Get ...
