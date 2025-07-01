@@ -26,5 +26,5 @@ func main() {
 }
 
 func init() {
- AssertCmd()
+ emei.AssertCmd()
 }
