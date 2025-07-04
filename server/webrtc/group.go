@@ -22,6 +22,6 @@ type lctroom struct {
 }
 
 type group interface {
-  hSig(m *msg, p *peer)
+  hSig(m *msg) error
   hData() // track and data channel
 }

@@ -63,6 +63,16 @@ func GetCfgItem(p string, v any) error {
   return _cfg.Scan(p, v)
 }
 
+// SetUID ...
+func SetUID(uid string) {
+  _uid = uid
+}
+
+// GetUID ...
+func GetUID() string {
+  return _uid
+}
+
 // getCoderType ...
 func getCoderType(p string) string {
   ext := path.Ext(p)

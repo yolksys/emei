@@ -126,6 +126,7 @@ func getCfgFilePath(appPath string) error {
 var (
   _path string
   _cfg  *config
+  _uid  string
 )
 
 var Service string

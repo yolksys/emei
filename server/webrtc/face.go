@@ -2,7 +2,7 @@ package webrtc
 
 // signal class from 1------------------------------
 const (
-  // req attrs: jwt
+  // req attrs: optional uid
   // optional retv attrs:  code, reason
   SigClassLogin byte = iota + 1
   // req attrs: name=uuid target=user name
@@ -30,7 +30,7 @@ const (
 )
 
 const (
-  SigClassNotify   byte = 250
+  SigClassNotify   byte = 251
   SigClassResponse byte = 255
 )
 

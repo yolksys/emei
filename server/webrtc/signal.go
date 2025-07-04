@@ -7,6 +7,7 @@ import (
   "reflect"
 
   "github.com/gorilla/websocket"
+  "github.com/yolksys/emei/cfg"
   "github.com/yolksys/emei/env"
 )
 
@@ -16,7 +17,27 @@ type Webrtc0 struct{}
 func (w *Webrtc0) Signal(e env.Env, conn any) {
   defer e.Return()
 
-  do_ := func(m *msg) {
+  newCli := func(uid string) {
+    if uid == "" {
+      e.AssertErr(fmt.Errorf("fail:signal login, reason:null uid"))
+    }
+
+    cli := &client{
+      uid: uid,
+      oto: []*otochan{},
+      otm: map[string]*otmroom{},
+      mtm: map[string]*mtmroom{},
+    }
+
+    _, ok := _clients[uid]
+    if ok {
+      e.AssertErr(fmt.Errorf("fail:signal login, reason:repeated uid, uid:%s", uid))
+    }
+
+    _clients[uid] = cli
+  }
+
+  alloc := func(m *msg) {
     switch m.Class {
     case SigClassOTOCaller:
     case SigClassOTOCallee:
@@ -26,41 +47,81 @@ func (w *Webrtc0) Signal(e env.Env, conn any) {
     }
   }
 
+  // pass to group
+  passg := func(m *msg) error {
+    return nil
+  }
+
+  var response func(v any) error
+  var decode func(v any) error
+  isws := false
   var m msg
   switch c := conn.(type) {
   case io.ReadWriter:
     dec := json.NewDecoder(c)
-    for {
-      err := dec.Decode(&m)
-      e.AssertErr(err)
-      do_(&m)
-    }
+    decode = dec.Decode
+    enc := json.NewEncoder(c)
+    response = enc.Encode
 
   case *websocket.Conn:
-    for {
-      err := c.ReadJSON(&m)
-      e.AssertErr(err)
-      do_(&m)
-    }
+    isws = true
+    decode = c.ReadJSON
+    response = c.WriteJSON
   default:
     e.AssertErr(fmt.Errorf("fail:signal, reason: err conn type, conn type:%+v", reflect.TypeOf(conn).Name()))
+  }
+
+  var retv msg
+  retv.Class = SigClassResponse
+
+  for {
+    err := decode(&m)
+    e.AssertErr(err)
+    if m.Class == SigClassLogin {
+      var uid string
+      if isws {
+        uid = cfg.GetUID()
+      } else {
+        uid, _ = m.Attrs["uid"]
+      }
+      newCli(uid)
+    } else if m.Class == SigClassAllocLCT ||
+      m.Class == SigClassAllocMTM ||
+      m.Class == SigClassAllocOTM ||
+      m.Class == SigClassOTOCaller {
+      alloc(&m)
+    } else if m.Class == SigClassCfg ||
+      m.Class == SigClassOTOCallee ||
+      m.Class == SigClassAllocCli {
+      err = passg(&m)
+    } else {
+      err = fmt.Errorf("fail:signal, reason:not support class, class:%d", m.Class)
+    }
+
+    if err != nil {
+      defer func() {
+        delete(retv.Attrs, "code")
+        delete(retv.Attrs, "reason")
+      }()
+      retv.Attrs["code"] = "1"
+      retv.Attrs["reason"] = err.Error()
+    }
+    response(&retv)
   }
 }
 
 type msg struct {
-  Class  byte   `json:"class,omitempty"` // alloc/webrtc/rtp
-  Typ    byte   `json:"type,omitempty"`  // oto.webrtc/otm.
-  Name   string `json:"name,omitempty"`
-  Target string `json:"target,omitempty"`
-
-  Attrs map[string]string `json:"attrs,omitempty"` // content
+  Class byte              `json:"class,omitempty"`
+  Typ   byte              `json:"type,omitempty"`
+  Attrs map[string]string `json:"attrs,omitempty"`
 }
 
 type client struct {
-  name string
-  oto  []*otochan // two peer all are webrtc then pass data by turn
-  otm  map[string]*otmroom
-  mtm  map[string]*mtmroom
+  uid string
+  oto []*otochan // two peer all are webrtc then pass data by turn
+  otm map[string]*otmroom
+  mtm map[string]*mtmroom
+  lct map[string]*lctroom
 }
 
 var (
