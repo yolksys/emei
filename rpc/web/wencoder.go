@@ -4,6 +4,7 @@ import (
   "bytes"
   "encoding/json"
   "io"
+  "net/http"
   "sync"
 
   "github.com/yolksys/emei/env"
@@ -75,23 +76,35 @@ func (e *encoder) Release() {
 
 type decoder struct {
   r   *reader
+  req *http.Request
   dec *json.Decoder
 }
 
 // newDec ...
-func newDec(r io.ReadCloser) *decoder {
+func newDec(v any) *decoder {
   d := poolDec.Get().(*decoder)
-  d.r.r = r
+  switch r := v.(type) {
+  case *http.Request:
+    d.req = r
+    d.r.r = r.Body
+  case io.ReadCloser:
+    d.r.r = r
+  }
+
   return d
 }
 
 func (d *decoder) Header() (*env.Tjatse, error) {
   h := &env.Tjatse{}
-  err := d.Decode(h)
-  if err == io.EOF {
-    return h, nil
+  // err := d.Decode(h)
+  // if err == io.EOF {
+  //   return h, nil
+  // }
+  jwtc, err := d.req.Cookie("jwt")
+  if err == nil {
+    h.Jwt = jwtc.Value
   }
-  return h, err
+  return h, nil
 }
 
 func (d *decoder) Decode(v any) error {

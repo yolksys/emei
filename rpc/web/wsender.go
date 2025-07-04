@@ -4,7 +4,6 @@ import (
   "fmt"
   "net/http"
   "reflect"
-  "strings"
   "time"
 
   "github.com/yolksys/emei/env"
@@ -65,7 +64,7 @@ func (w *websender) Send(e env.Env, svc, met string, args ...any) call.Response 
   }
 
   r, err := w.http.Post(fmt.Sprintf("%s://%s:%s/%s", svc_.Trans, svc_.Ip, svc_.Port,
-    strings.ReplaceAll(met, ".", "/")), "application/json", enc.getReader())
+    met), "application/json", enc.getReader())
   e.AssertErr(err, func() { w.Delete(svc) })
   return &webres{r}
 }

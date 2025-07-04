@@ -7,11 +7,12 @@ import (
 )
 
 type peer struct {
-  name string
-  sigw chan io.Writer // write ice to peer
-  stmt byte           // stream type: "rtpc/weprtc"
-  stmr stmReader
-  stmw stmWriter
+  name  string
+  class byte           // otm, mtm lct...
+  stmt  byte           // stream type: "rtpc/weprtc"
+  sigw  chan io.Writer // write ice to peer
+  stmr  stmReader
+  stmw  stmWriter
 }
 
 type stmData struct {
@@ -29,8 +30,16 @@ type stmWriter interface {
 }
 
 // newPeer ...
-func newPeer(stmTyp byte) (*peer, error) {
-  p := &peer{stmt: stmTyp}
+func newPeer(sigclass, stmTyp byte, name string) (*peer, error) {
+  p := &peer{stmt: stmTyp, class: sigclass, name: name}
+  switch sigclass {
+  case SigClassOTOCaller:
+  case SigClassOTOCallee:
+  case SigClassAllocOTM:
+  case SigClassAllocMTM:
+  case SigClassAllocLCT:
+  }
+
   return p, nil
 }
 

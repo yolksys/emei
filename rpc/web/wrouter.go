@@ -3,7 +3,6 @@ package web
 import (
   "errors"
   "fmt"
-  "mime/multipart"
   "net/http"
   "reflect"
   "strings"
@@ -11,7 +10,6 @@ import (
   "github.com/yolksys/emei/env"
   "github.com/yolksys/emei/log"
   "github.com/yolksys/emei/rpc/coder"
-  "github.com/yolksys/emei/utils"
 )
 
 // route ...
@@ -19,24 +17,20 @@ func (s *webrpc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
   // buf := utils.NewBuffer()
   // io.Copy(buf, r.Body)b
   // r.Body.Close()
-  cntTyp := r.Header.Get("Content-Type")
-  io_ := r.Body
-  stream := [1]any{}
-  var err error
-  if cntTyp == "multipart/form-data" {
-    defer r.Body.Close()
-    err = r.ParseMultipartForm(1024 * 1024 * 10)
-    if err != nil {
-      w.WriteHeader(http.StatusBadRequest)
-      sss := fmt.Sprintf("fail:http.ParseMultipartForm, reason:%s, path:%s", err.Error(), r.URL.Path)
-      w.Write([]byte(sss))
-      log.Error("msg", sss)
-      return
-    }
-  }
+  cntTyp := r.Header.Get("content-type")
+  fmt.Printf("UUUUUUUUUUUUUUUUUUU:%s------------%s----------%s\n", cntTyp, r.Header.Get("accept"), r.Header.Get("upgrade"))
+  var stream any
 
   p := strings.Trim(r.URL.Path, "/")
-  e := env.New("web", strings.ReplaceAll(p, "/", "."), newEnc(w), newDec(io_))
+  pos := strings.Index(p, "/")
+  metPath := ""
+  if pos <= 0 {
+    metPath = p
+  } else {
+    metPath = p[:pos]
+  }
+
+  e := env.New("web", metPath, newEnc(w), newDec(r))
   defer e.Finish()
   e.Assert()
   wh_ := func() { w.WriteHeader(http.StatusInternalServerError) }
@@ -44,31 +38,24 @@ func (s *webrpc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
   if r.Header.Get("upgrade") == "websocket" {
     c, err := newWebSock(w, r)
     e.AssertErr(err, wh_)
-    stream[0] = c
+    stream = c
   } else if cntTyp == "multipart/form-data" {
-    defer func() {
-      for _, v := range stream {
-        v.(multipart.File).Close()
-      }
-    }()
-
-    io_ = utils.NewRbuffer([]byte(r.Form["params"][0]))
-    if len(r.MultipartForm.File["file"]) == 0 {
-      e.AssertErr(fmt.Errorf("fail:file upload, file num:0, path:%s", r.URL.Path), wh_)
-    }
-    f, err := r.MultipartForm.File["file"][0].Open()
+    err := r.ParseMultipartForm(1024 * 1024 * 10)
     if err != nil {
-      e.AssertErr(fmt.Errorf("fail:http.fileheader.open, reason: %s, path:%s", err.Error(), r.URL.Path), wh_)
+      w.WriteHeader(http.StatusBadRequest)
+      sss := fmt.Sprintf("fail:http.ParseMultipartForm, reason:%s, path:%s", err.Error(), r.URL.Path)
+      w.Write([]byte(sss))
+      log.Error("msg", sss)
       return
     }
-    stream[0] = f
-  } else if cntTyp == "application/download" {
-    stream[0] = w
+    stream = (*upFiler)(r.MultipartForm)
+  } else if pos > 0 {
+    stream = newDnFiler(w, p[pos+1:])
   } else {
-    stream[0] = nil
+    stream = nil
   }
 
-  _path := strings.Split(p, "/")
+  _path := strings.Split(metPath, ".")
   if len(_path) != 2 {
     e.AssertErr(errors.New("fail: path, path:"+r.URL.Path), wh_)
   }
@@ -85,8 +72,8 @@ func (s *webrpc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
   parms := coder.ParseParam(e, met, recv)
   e.Assert()
   e.PrintParams(parms...)
-  if stream[0] != nil {
-    parms = append(parms, reflect.ValueOf(stream[0]))
+  if stream != nil {
+    parms = append(parms, reflect.ValueOf(stream))
   }
 
   f := met.Method.Func
