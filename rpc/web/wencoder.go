@@ -96,10 +96,15 @@ func newDec(v any) *decoder {
 
 func (d *decoder) Header() (*env.Tjatse, error) {
   h := &env.Tjatse{}
-  // err := d.Decode(h)
-  // if err == io.EOF {
-  //   return h, nil
-  // }
+  ua_ := d.req.Header.Get("user-agent")
+  if ua_ == defaultUserAgent {
+    err := d.Decode(h)
+    if err == io.EOF {
+      return h, nil
+    }
+    return h, err
+  }
+
   jwtc, err := d.req.Cookie("jwt")
   if err == nil {
     h.Jwt = jwtc.Value

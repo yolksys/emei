@@ -3,6 +3,7 @@ package emei
 import (
   "github.com/yolksys/emei/env"
   _c "github.com/yolksys/emei/rpc/call"
+  "github.com/yolksys/emei/rpc/web"
 )
 
 var (
@@ -26,3 +27,8 @@ func Call2[T1, T2 any](e Env, svcName, met string, args ...any) (T1, T2, error) 
 func Call3[T1, T2, T3 any](e Env, svcName, met string, args ...any) (T1, T2, T3, error) {
   return _c.Call3[T1, T2, T3](e.(env.Env), svcName, met, args...)
 }
+
+type (
+  UpFile = web.UpFile
+  DnFile = web.DnFiler
+)

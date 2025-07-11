@@ -7,7 +7,7 @@ import (
 )
 
 type UpFile interface {
-  Values() map[string][]string
+  //  Values() map[string][]string
   Files() map[string][]*multipart.FileHeader
 }
 
