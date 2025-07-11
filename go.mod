@@ -20,6 +20,7 @@ require (
 	github.com/gorilla/websocket v1.5.4-0.20250319132907-e064f32e3674
 	github.com/pion/stun v0.6.1
 	github.com/quic-go/quic-go v0.52.0
+	github.com/sony/sonyflake/v2 v2.2.0
 	go.etcd.io/etcd/client/v3 v3.6.0
 	go.opentelemetry.io/otel v1.36.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.36.0
@@ -47,7 +48,7 @@ require (
 	github.com/pion/transport/v2 v2.2.1 // indirect
 	github.com/pion/transport/v3 v3.0.7 // indirect
 	github.com/pion/turn/v4 v4.0.0 // indirect
-	github.com/pion/webrtc/v4 v4.1.2 
+	github.com/pion/webrtc/v4 v4.1.2
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/wlynxg/anet v0.0.5 // indirect
 )

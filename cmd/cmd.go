@@ -89,6 +89,11 @@ func Uint64(name, desc string, short rune, dft uint64) uint64 {
   return dft
 }
 
+// Lookup ...
+func Lookup(key string) (string, bool) {
+  return "", false
+}
+
 // Assert ...
 func Assert() {
   noAllUsed := false

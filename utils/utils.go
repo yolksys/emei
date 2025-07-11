@@ -21,7 +21,12 @@ func AssertErr(e error) {
 }
 
 // ...
-func AssertB(a bool) {
+func AssertTrue(a bool) {
+  if a {
+    f, fu_, l := GetCallInfo(1)
+    ci_ := fmt.Sprintf(", file:%s, func:%s, line:%d", f, fu_, l)
+    log.Fatal(ci_)
+  }
 }
 
 // ...
@@ -146,6 +151,11 @@ func ExecCommand(name string, arg ...string) (string, error) {
 func IsIpv4(s string) bool {
   i := net.ParseIP(s)
   return i != nil && i.To4() != nil
+}
+
+// IsIp ...
+func IsIp(s string) bool {
+  return net.ParseIP(s) != nil
 }
 
 var (

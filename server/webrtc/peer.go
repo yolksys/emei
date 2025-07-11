@@ -1,18 +1,24 @@
 package webrtc
 
 import (
-  "io"
-
   "github.com/pion/webrtc/v4"
 )
 
 type peer struct {
+  class byte // otm, mtm lct...
+  typ   byte // stream type: "rtpc/weprtc"
   name  string
-  class byte           // otm, mtm lct...
-  stmt  byte           // stream type: "rtpc/weprtc"
-  sigw  chan io.Writer // write ice to peer
+  sigw  chan *msg // write ice to peer
   stmr  stmReader
   stmw  stmWriter
+}
+
+func (p *peer) Init() error {
+  switch p.typ {
+  case SigTypeStmWebrtc:
+  }
+
+  return nil
 }
 
 type stmData struct {
@@ -26,14 +32,14 @@ type stmReader interface {
 }
 
 type stmWriter interface {
-  Write(d *stmData) error
+  Writte(d *stmData) error
 }
 
 // newPeer ...
 func newPeer(sigclass, stmTyp byte, name string) (*peer, error) {
-  p := &peer{stmt: stmTyp, class: sigclass, name: name}
+  p := &peer{typ: stmTyp, class: sigclass, name: name}
   switch sigclass {
-  case SigClassOTOCaller:
+  case SigClassOTOCall:
   case SigClassOTOCallee:
   case SigClassAllocOTM:
   case SigClassAllocMTM:
@@ -47,6 +53,6 @@ type webrtcReader struct {
   tracks []*webrtc.TrackRemote
 }
 
-type webWriter struct {
+type webrtcWriter struct {
   tracks []*webrtc.TrackLocal
 }

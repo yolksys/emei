@@ -16,6 +16,7 @@ import (
 var (
   Lookup    = lookup
   GetRpcNet = getRpcNet
+  GetEPTs   func(svc string) (ips []string, err error) // get all endpoints of a service
 )
 
 func lookupLocal(svc, rpc string) (trans string, ip string, port string, err error) {

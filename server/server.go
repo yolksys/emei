@@ -14,9 +14,9 @@ import (
 // init(arg ...
 func init() {
   // for {reger.RegRpc()}
-  for _, value := range rpc.RpcImps {
-    reger.RegRpc(value)
-  }
+  // for _, value := range rpc.RpcImps {
+  //   reger.RegRpc(value)
+  // }
 }
 
 // RegRcvr ...
@@ -30,14 +30,40 @@ func RegRcvr(rcvr any) error {
 }
 
 // Serve ...
-func Serve() error {
-  for _, v := range reger.RegedRpc {
-    v.RegRcvr(_rcvrs)
+func Serve(svr ...string) error {
+  for _, v := range svr {
+    switch v {
+    case "webrtc":
+    case "mqtt":
+    }
   }
-  addMetrics()
-  for _, v := range reger.RegedRpc {
-    v.Start()
-    // utils.AssertErr(e)
+
+  if len(_rcvrs) != 0 {
+    rpc_ := []rpc.RPC{rpc.RpcImps["nrpc"]}
+    for _, v := range svr {
+      if v == "nrpc" {
+        continue
+      }
+
+      p, ok := rpc.RpcImps[v]
+      if !ok {
+        continue
+      }
+      rpc_ = append(rpc_, p)
+    }
+
+    for _, value := range rpc_ {
+      reger.RegRpc(value)
+    }
+    for _, v := range reger.RegedRpc {
+      v.RegRcvr(_rcvrs)
+    }
+    addMetrics()
+
+    for _, v := range reger.RegedRpc {
+      v.Start()
+      // utils.AssertErr(e)
+    }
   }
 
   wait()

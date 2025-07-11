@@ -22,3 +22,8 @@ func WatchSvcCfg(svc string) (<-chan etcout.Event, error) {
 func GetSvcIp(svc string) (string, error) {
   return dns.GetSvcIp(svc)
 }
+
+// GetEPTs ...
+func GetEPTs(svc string) (ips []string, err error) {
+  return nil, nil
+}
