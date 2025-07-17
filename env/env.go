@@ -79,6 +79,10 @@ func (e *env) Finish() {
 
   if r := recover(); r != nil {
     // e.L.error("stack", string(debug.Stack()))
+    if e.err == nil {
+      e.err = fmt.Errorf("fail: unexpected panic")
+    }
+
     fal := utils.GetPanicFrame(panicFrameSkip)
     e.L.CallerSkip(-1)
     // defer e.L.CallerSkip(envLogSkip)
@@ -113,6 +117,10 @@ func (e *env) Return() {
   if r == nil {
     e.L.Event("*", "returned")
     return
+  }
+
+  if e.err == nil {
+    e.err = fmt.Errorf("fail: unexpected panic")
   }
 
   fal := utils.GetPanicFrame(panicFrameSkip + 1)
@@ -165,12 +173,12 @@ func (e *env) AssertErr(err error, clear ...func()) {
   panic("")
 }
 
-func (e *env) AssertBool(ok bool, fmt_ string, args ...any) {
+func (e *env) AssertBool(ok bool, args ...any) {
   if ok {
     return
   }
 
-  err := fmt.Errorf(fmt_, args...)
+  err := fmt.Errorf("fail:assertbool, info:%+v", args)
   e.L.Error("msg", err)
   e.err = err
   panic("")

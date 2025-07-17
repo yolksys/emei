@@ -11,7 +11,7 @@ type Env interface {
   Err() error
   Errorf(code uint16, f string, args ...any) error
   AssertErr(err error, clear ...func())
-  AssertBool(ok bool, fmt_ string, args ...any)
+  AssertBool(ok bool, args ...any)
   Event(args ...interface{})
   PrintParams(v ...reflect.Value)
   GetDec() decoder

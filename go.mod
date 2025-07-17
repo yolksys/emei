@@ -30,6 +30,8 @@ require (
 	k8s.io/client-go v0.33.1
 )
 
+require github.com/golang-jwt/jwt/v5 v5.2.3
+
 require (
 	github.com/pion/datachannel v1.5.10 // indirect
 	github.com/pion/dtls/v2 v2.2.7 // indirect
